@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Module Detail{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Module Detail: {{ module.module_name }}</h2>
+
+    <!-- Module Information -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>Module Information</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>Module Name:</strong> {{ module.module_name }}</p>
+            <p><strong>Module URL:</strong> <a href="{{ module.module_url }}">{{ module.module_url }}</a></p>
+            <p><strong>Icon:</strong> <i class="{{ module.icon }}"></i></p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-start">
+        <a href="{% url 'module_group:module_edit' module.pk %}" class="btn btn-warning me-2">Edit</a>
+        <a href="{% url 'module_group:module_delete' module.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+
+    <a href="{% url 'module_group:module_list' %}" class="btn btn-secondary mt-3">Back to Module List</a>
+</div>
+{% endblock %}

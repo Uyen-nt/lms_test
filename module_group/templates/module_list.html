@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Module List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Module List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Module Name</th>
+                <th>Module Group</th>
+                <th>Icon</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for module in modules %}
+            <tr>
+                <td>{{ module.module_name }}</td>
+                <td>{{ module.module_group }}</td>
+                <td><i class="{{ module.icon }}"></i></td>
+                <td>
+                    <a href="{% url 'module_group:module_detail' module.pk %}" class="btn btn-info btn-sm">Details</a>
+                    <a href="{% url 'module_group:module_edit' module.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'module_group:module_delete' module.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'module_group:module_add' %}" class="btn btn-primary">Add New Module</a>
+</div>
+{% endblock %}

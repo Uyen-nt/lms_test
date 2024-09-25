@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Module Group Detail{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Module Group: {{ module_group.group_name }}</h2>
+
+    <!-- Module Group Information -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>Module Group Info</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>Group Name:</strong> {{ module_group.group_name }}</p>
+        </div>
+    </div>
+
+    <!-- List of Modules in the Group -->
+    <h3>Modules in the Group</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Module Name</th>
+                <th>URL</th>
+                <th>Icon</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for module in module_group.modules.all %}
+            <tr>
+                <td>{{ module.module_name }}</td>
+                <td>{{ module.module_url }}</td>
+                <td><i class="{{ module.icon }}"></i></td>
+                <td>
+                    <a href="{% url 'module_group:module_detail' module.pk %}" class="btn btn-info btn-sm">Details</a>
+                    <a href="{% url 'module_group:module_edit' module.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'module_group:module_delete' module.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No modules available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'module_group:module_group_list' %}" class="btn btn-secondary">Back to Module Group List</a>
+</div>
+{% endblock %}

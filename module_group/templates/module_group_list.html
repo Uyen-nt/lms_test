@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Module Groups{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Module Groups</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Group Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for group in module_groups %}
+            <tr>
+                <td>{{ group.group_name }}</td>
+                <td>
+                    <a href="{% url 'module_group:module_group_detail' group.pk %}" class="btn btn-info btn-sm">Details</a>
+                    <a href="{% url 'module_group:module_group_edit' group.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'module_group:module_group_delete' group.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'module_group:module_group_add' %}" class="btn btn-primary">Add New Module Group</a>
+</div>
+{% endblock %}
